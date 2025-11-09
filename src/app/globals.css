@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Light theme variables */
+:root {
+  --background: #f9fafb; /* bg-gray-50 */
+  --foreground: #1f2937; /* text-gray-800 */
+  --card: #ffffff; /* bg-white */
+  --card-foreground: #111827; /* text-gray-900 */
+  --secondary: #4b5563; /* text-gray-600 */
+  --secondary-foreground: #374151; /* text-gray-700 */
+  --accent: #06b6d4; /* text-cyan-400 */
+  --accent-foreground: #0891b2; /* text-cyan-500 */
+  --border: #e5e7eb; /* border-gray-200 */
+  --gradient-from: #3b82f6; /* from-blue-500 */
+  --gradient-to: #06b6d4; /* to-cyan-400 */
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --background: #111827; /* bg-gray-900 */
+  --foreground: #e5e7eb; /* text-gray-200 */
+  --card: #1f2937; /* bg-gray-800/50 */
+  --card-foreground: #f3f4f6; /* text-white */
+  --secondary: #9ca3af; /* text-gray-400 */
+  --secondary-foreground: #d1d5db; /* text-gray-300 */
+  --accent: #06b6d4; /* text-cyan-400 */
+  --accent-foreground: #0891b2; /* text-cyan-500 */
+  --border: #374151; /* border-gray-800 */
+  --gradient-from: #3b82f6; /* from-blue-500 */
+  --gradient-to: #06b6d4; /* to-cyan-400 */
+}
+
+/* Font sizes */
+:root {
+  --fs-h1: 3.75rem;
+  --fs-h2: 2.25rem;
+  --fs-3xl: 1.875rem;
+  --fs-2xl: 1.5rem;
+  --fs-xl: 1.25rem;
+  --fs-lg: 1.125rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.875rem;
+}
+@media screen and (max-width: 1023px) {
+  :root {
+    --fs-h1: 3rem;
+    --fs-h2: 2rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  :root {
+    --fs-h1: 2.25rem;
+    --fs-h2: 1.75rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  :root {
+    --fs-h1: 2rem;
+    --fs-h2: 1.5rem;
+    --fs-3xl: 1.25rem;
+    --fs-2xl: 1.125rem;
+    --fs-xl: 1rem;
+    --fs-lg: 0.875rem;
+  }
+}
+
+/* Theme configuration */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-gradient-from: var(--gradient-from);
+  --color-gradient-to: var(--gradient-to);
+
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-3xl: var(--fs-3xl);
+  --text-2xl: var(--fs-2xl);
+  --text-xl: var(--fs-xl);
+  --text-lg: var(--fs-lg);
+  --text-md: var(--fs-md);
+  --text-sm: var(--fs-sm);
+
+  --breakpoint-3xl: 120rem;
+}
+
+/* Container utility */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant md {
+    padding-inline: 2rem;
+  }
+  @variant lg {
+    padding-inline: 3rem;
+  }
+  @variant xl {
+    padding-inline: 4rem;
+  }
+  @variant 2xl {
+    padding-inline: 5rem;
+  }
+  @variant 3xl {
+    padding-inline: 5rem;
+  }
+}
+
+/* Body styles */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-inter, sans-serif);
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+/* Global animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out;
+}
+
+/* Music Animation Styles */
+.heartbeat-container {
+  overflow: hidden;
+}
+
+.heartbeat-line {
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.heartbeat-line-2 {
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.playing .heartbeat-line,
+.playing .heartbeat-line-2 {
+  animation:
+    flow 4s linear infinite,
+    beat 1s ease-in-out infinite;
+}
+
+.playing .heartbeat-line-2 {
+  animation:
+    flow 4s linear infinite reverse,
+    beat 1s ease-in-out infinite;
+}
+
+@keyframes flow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-200);
+  }
+}
+
+@keyframes beat {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: scaleY(1);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: scaleY(1.2);
+  }
+}
+
+.progress-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  max-width: 300px;
+  height: 6px;
+  background: linear-gradient(to right, var(--color-gradient-from), var(--color-gradient-to));
+  border-radius: 3px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.progress-slider:hover {
+  opacity: 1;
+}
+
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--color-card);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.progress-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.progress-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--color-card);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
